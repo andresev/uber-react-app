@@ -11,6 +11,8 @@ import tailwind from "twrnc";
 import { Icon } from "@rneui/themed";
 
 import { useNavigation } from "@react-navigation/native";
+import { useSelector } from "react-redux";
+import { selectOrigin } from "../slices/navSlice";
 
 const data = [
   {
@@ -29,6 +31,7 @@ const data = [
 
 const NavOptions = () => {
   const navigation = useNavigation();
+  const origin = useSelector(selectOrigin);
   return (
     <FlatList
       data={data}
@@ -37,10 +40,13 @@ const NavOptions = () => {
       renderItem={({ item }) => (
         <TouchableOpacity
           style={tailwind`p-2 pl-6 pb-8 pt-4 bg-gray-200 m-2 w-40`}
-          onPress={() => navigation.navigate(item.screen)}
+          onPress={() => {
+            navigation.navigate(item.screen);
+          }}
           activeOpacity={0.5}
+          disabled={!origin}
         >
-          <View>
+          <View style={tailwind`${!origin && "opacity-20"}`}>
             <Image
               style={{ width: 120, height: 120, resizeMode: "contain" }}
               source={{ uri: item.image }}
