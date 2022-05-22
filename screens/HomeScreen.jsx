@@ -2,6 +2,7 @@ import React from "react";
 import { View, Text, StyleSheet, SafeAreaView, Image } from "react-native";
 import tailwind from "twrnc";
 import NavOptions from "../components/NavOptions";
+import NavFavorites from "../components/NavFavorites";
 
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
 import { GOOGLE_MAPS_APIKEY } from "@env";
@@ -33,6 +34,9 @@ const HomeScreen = () => {
             },
           }}
           onPress={(data, details = null) => {
+            console.log(data);
+            console.log(details);
+
             dispatch(
               setOrigin({
                 location: details.geometry.location,
@@ -51,9 +55,10 @@ const HomeScreen = () => {
             language: "en",
           }}
           nearbyPlacesAPI="GooglePlacesSearch"
-          debounce={400}
+          debounce={100}
         />
         <NavOptions />
+        <NavFavorites />
       </View>
     </SafeAreaView>
   );
