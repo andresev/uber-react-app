@@ -50,9 +50,9 @@ const RideOptionsCar = () => {
       <FlatList
         data={data}
         keyExtractor={(item) => item.id}
-        renderItem={({ item: { title } }) => (
+        renderItem={({ item: { title, multiplier, image } }) => (
           <View>
-            <Text>Hello</Text>
+            <Text>{title}</Text>
           </View>
         )}
       />
